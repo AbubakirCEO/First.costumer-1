@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="uz" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Hole Creator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        spaceBlack: '#020205',
+                        eventHorizon: '#0b0b14',
+                        glowPurple: '#9333ea',
+                        glowBlue: '#3b82f6'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-spaceBlack text-white font-sans antialiased pb-24 select-none">
+
+    <!-- HEADER -->
+    <header class="flex justify-between items-center p-4 border-b border-purple-900/40 sticky top-0 bg-spaceBlack/90 backdrop-blur z-50 shadow-lg shadow-purple-950/20">
+        <div class="flex items-center space-x-2">
+            <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-purple-600 to-indigo-600 flex items-center justify-center font-bold text-lg shadow-md shadow-purple-500/50">🕳️</div>
+            <span class="font-extrabold text-lg tracking-wider bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">Black Hole Creator</span>
+        </div>
+        <div class="flex items-center space-x-3">
+            <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-purple-600 to-cyan-500 flex items-center justify-center font-semibold text-xs shadow-inner">BH</div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="p-4 max-w-md mx-auto">
+
+        <!-- ASOSIY TAB -->
+        <section id="tab-asosiy" class="space-y-4 tab-content">
+            <div class="bg-gradient-to-br from-purple-900/30 via-indigo-950/40 to-spaceBlack border border-purple-500/30 p-5 rounded-2xl shadow-xl shadow-purple-950/30 relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 w-32 h-32 bg-purple-600/10 rounded-full blur-2xl"></div>
+                <h1 class="text-xl font-extrabold mb-1 tracking-wide">Xush kelibsiz, Kosmonavt</h1>
+                <p class="text-sm text-gray-300 mb-4">Cheksiz imkoniyatlarga ega Telegram botlar olamini yarating.</p>
+                <button onclick="switchTab('yaratish')" class="w-full py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 font-bold rounded-xl shadow-lg shadow-purple-600/40 transition">⚡ Qora tuynukni ishga tushirish</button>
+            </div>
+
+            <div class="bg-eventHorizon border border-purple-950/60 p-4 rounded-2xl space-y-3 shadow-md">
+                <h3 class="font-semibold text-purple-300">Qanday ishlaydi?</h3>
+                <div class="space-y-2 text-sm text-gray-400">
+                    <p><b>1. Tanlash:</b> «Yaratish» bo'limidan o'zingizga kerakli bot turini tanlang.</p>
+                    <p><b>2. Bog'lash:</b> Token va admin ID orqali tizimga ulang.</p>
+                    <p><b>3. Boshqarish:</b> Botingiz kosmik tezlikda ishlay boshlaydi!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- YARATISH TAB -->
+        <section id="tab-yaratish" class="space-y-4 tab-content hidden">
+            <h2 class="text-xl font-bold">Bot Yaratish</h2>
+            <p class="text-sm text-gray-400">Fazoviy tezlikda o'z botingizni yarating</p>
+
+            <div class="bg-eventHorizon border border-purple-950/60 p-4 rounded-2xl space-y-3">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-purple-600/20 text-purple-400 rounded-xl flex items-center justify-center text-2xl font-bold">🎬</div>
+                    <div>
+                        <h4 class="font-bold">Kino Bot</h4>
+                        <p class="text-xs text-gray-400">Kino va seriallar tarqatuvchi kuchli bot</p>
+                    </div>
+                </div>
+                <div class="flex justify-between items-center pt-2">
+                    <span class="text-sm font-semibold text-purple-400">8 500 so'm / oy</span>
+                    <button onclick="openCreateModal('kino')" class="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-sm font-bold rounded-xl shadow-md shadow-purple-600/30">Yaratish ></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- BOTLARIM TAB -->
+        <section id="tab-botlarim" class="space-y-4 tab-content hidden">
+            <h2 class="text-xl font-bold">Botlarim</h2>
+            <div class="text-center py-12 bg-eventHorizon border border-purple-950/60 rounded-2xl">
+                <div class="text-4xl mb-2 animate-pulse">🕳️</div>
+                <p class="text-gray-400 mb-4">Hali faol botlaringiz yo'q.</p>
+                <button onclick="switchTab('yaratish')" class="px-6 py-2.5 bg-purple-600 text-sm font-bold rounded-xl shadow-md shadow-purple-600/30">+ Bot yaratish</button>
+            </div>
+        </section>
+
+        <!-- PUL ISHLASH TAB -->
+        <section id="tab-pul-ishlash" class="space-y-4 tab-content hidden">
+            <h2 class="text-xl font-bold">Kosmik Bonuslar</h2>
+            <div class="bg-eventHorizon border border-purple-950/60 p-4 rounded-2xl">
+                <h4 class="font-semibold mb-2 text-purple-300">Taklif havolangiz</h4>
+                <p class="text-xs text-gray-400 mb-3">Do'stlaringizni taklif qiling va har bir to'lovdan 15% bonus oling.</p>
+                <div class="bg-spaceBlack p-3 rounded-xl border border-purple-950 text-xs text-cyan-400 break-all mb-3">https://t.me/BlackHoleCreatorBot?start=ref_space</div>
+                <button class="w-full py-2.5 bg-purple-600 text-sm font-bold rounded-xl">Ulashish</button>
+            </div>
+        </section>
+
+        <!-- TO'LDIRISH TAB -->
+        <section id="tab-toldirish" class="space-y-4 tab-content hidden">
+            <h2 class="text-xl font-bold">Hisobni to'ldirish</h2>
+            <div class="bg-eventHorizon border border-purple-950/60 p-4 rounded-2xl space-y-3">
+                <label class="text-xs text-gray-400">Summani kiriting (so'm)</label>
+                <input type="number" placeholder="20000" class="w-full bg-spaceBlack border border-purple-950 p-3 rounded-xl focus:outline-none focus:border-purple-500">
+                <button class="w-full py-3 bg-purple-600 font-bold rounded-xl mt-2 shadow-lg shadow-purple-600/30">To'lov qilish</button>
+            </div>
+        </section>
+
+        <!-- HISOBIM TAB -->
+        <section id="tab-hisobim" class="space-y-4 tab-content hidden">
+            <div class="text-center space-y-1">
+                <h3 class="font-bold text-lg text-purple-300">@blackhole_admin</h3>
+                <p class="text-xs text-gray-400">ID: 847670656</p>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+                <div class="bg-eventHorizon border border-purple-950/60 p-4 rounded-2xl">
+                    <span class="text-xs text-gray-400">Balans</span>
+                    <h4 class="text-xl font-bold mt-1 text-cyan-400">0 so'm</h4>
+                </div>
+                <div class="bg-eventHorizon border border-purple-950/60 p-4 rounded-2xl">
+                    <span class="text-xs text-gray-400">Botlar</span>
+                    <h4 class="text-xl font-bold mt-1 text-purple-400">0 ta</h4>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- BOTTOM NAVIGATION -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-eventHorizon/95 backdrop-blur border-t border-purple-950 py-2 px-3 flex justify-around items-center z-50">
+        <button onclick="switchTab('asosiy')" class="nav-btn flex flex-col items-center text-purple-400" data-target="asosiy"><span class="text-lg">🌌</span><span class="text-[10px]">Asosiy</span></button>
+        <button onclick="switchTab('yaratish')" class="nav-btn flex flex-col items-center text-gray-400" data-target="yaratish"><span class="text-lg">⚡</span><span class="text-[10px]">Yaratish</span></button>
+        <button onclick="switchTab('botlarim')" class="nav-btn flex flex-col items-center text-gray-400" data-target="botlarim"><span class="text-lg">🛰️</span><span class="text-[10px]">Botlarim</span></button>
+        <button onclick="switchTab('pul-ishlash')" class="nav-btn flex flex-col items-center text-gray-400" data-target="pul-ishlash"><span class="text-lg">🎁</span><span class="text-[10px]">Bonus</span></button>
+        <button onclick="switchTab('toldirish')" class="nav-btn flex flex-col items-center text-gray-400" data-target="toldirish"><span class="text-lg">💳</span><span class="text-[10px]">To'ldirish</span></button>
+        <button onclick="switchTab('hisobim')" class="nav-btn flex flex-col items-center text-gray-400" data-target="hisobim"><span class="text-lg">👤</span><span class="text-[10px]">Hisobim</span></button>
+    </nav>
+
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-purple-400');
+                btn.classList.add('text-gray-400');
+                if(btn.getAttribute('data-target') === tabId) {
+                    btn.classList.remove('text-gray-400');
+                    btn.classList.add('text-purple-400');
+                }
+            });
+        }
+        function openCreateModal(kind) {
+            alert(kind + ' botini yaratish boshlandi.');
+        }
+    </script>
+</body>
+</html>
